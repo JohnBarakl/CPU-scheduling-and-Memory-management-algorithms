@@ -8,27 +8,28 @@ public class SOTesting {
     @Test
     public void TestNormalFCFSWithFirstFit()
     {
-        final Process[] processes =
-                {
-                // Process parameters are: arrivalTime, burstTime, memoryRequirements (kB)
-                new Process(1, 5, 40),
-                new Process(3, 2, 35),
-                new Process(4, 1, 12),
-                new Process(5, 6, 23)
-        };
-        final int[] availableBlockSizes = {35,57,40,25}; // sizes in kB
-        MemoryAllocationAlgorithm algorithm = new FirstFit(availableBlockSizes);
-        MMU mmu = new MMU(availableBlockSizes, algorithm);
-        Scheduler scheduler = new FCFS();
-        CPU cpu = new CPU(scheduler, mmu, processes);
-        cpu.run();
+            final Process[] processes =
+                    {
+                            // Process parameters are: arrivalTime, burstTime, memoryRequirements (kB)
+                            new Process(1, 5, 40),
+                            new Process(3, 2, 35),
+                            new Process(4, 1, 12),
+                            new Process(5, 6, 23)
+                    };
+            final int[] availableBlockSizes = {35,57,40,25}; // sizes in kB
+            MemoryAllocationAlgorithm algorithm = new FirstFit(availableBlockSizes);
+            MMU mmu = new MMU(availableBlockSizes, algorithm);
+            Scheduler scheduler = new FCFS();
+            CPU cpu = new CPU(scheduler, mmu, processes);
+            cpu.run();
 
-        // Process 1
-      //  assertEquals(,processes[0].getTurnAroundTime());
-       // assertEquals(,processes[0].getWaitingTime());
-        //assertEquals(,processes[0].getResponseTime());
 
-        // Process 2
+            // Process 1
+            assertEquals(8.0,processes[0].getTurnAroundTime());
+            assertEquals(3.0,processes[0].getWaitingTime());
+            assertEquals(3.0,processes[0].getResponseTime());
+
+            // Process 2
    //     assertEquals(7,processes[1].getTurnAroundTime());
         //assertEquals(,processes[1].getWaitingTime());
         //assertEquals(,processes[1].getResponseTime());
