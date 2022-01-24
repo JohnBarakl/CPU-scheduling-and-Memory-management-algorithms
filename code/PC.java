@@ -2,6 +2,41 @@
 public class PC {
 
     public static void main(String[] args) {
+
+
+        final Process[] processes = {
+                // Process parameters are: arrivalTime, burstTime, memoryRequirements (kB)
+                new Process(0, 5, 10),
+                new Process(2, 2, 40),
+                new Process(3, 1, 25),
+                new Process(4, 3, 30)
+                };
+                final int[] availableBlockSizes = {15, 40, 10, 20}; // sizes in kB
+                MemoryAllocationAlgorithm algorithm = new WorstFit(availableBlockSizes);
+                MMU mmu = new MMU(availableBlockSizes, algorithm);
+                Scheduler scheduler = new FCFS();
+                CPU cpu = new CPU(scheduler, mmu, processes);
+                cpu.run();
+
+                System.out.println("Process 1:Turnaround Time: "+processes[0].getTurnAroundTime());
+                System.out.println("Process 1:Waiting Time: "+processes[0].getWaitingTime());
+                System.out.println("Process 1:Response Time: "+processes[0].getResponseTime());
+
+                System.out.println("Process 2:Turnaround Time: "+processes[1].getTurnAroundTime());
+                System.out.println("Process 2:Waiting Time: "+processes[1].getWaitingTime());
+                System.out.println("Process 2:Response Time: "+processes[1].getResponseTime());
+
+                System.out.println("Process 3:Turnaround Time: "+processes[2].getTurnAroundTime());
+                System.out.println("Process 3:Waiting Time: "+processes[2].getWaitingTime());
+                System.out.println("Process 3:Response Time: "+processes[2].getResponseTime());
+
+                System.out.println("Process 4:Turnaround Time: "+processes[3].getTurnAroundTime());
+                System.out.println("Process 4:Waiting Time: "+processes[3].getWaitingTime());
+                System.out.println("Process 4:Response Time: "+processes[3].getResponseTime());
+
+
+
+        /*
         final Process[] processes = {
                 // Process parameters are: arrivalTime, burstTime, memoryRequirements (kB)
                 new Process(2, 3, 55),
@@ -15,7 +50,7 @@ public class PC {
         Scheduler scheduler = new FCFS();
         CPU cpu = new CPU(scheduler, mmu, processes);
         cpu.run();
-    /*
+
          final Process[] processes2 = {
         // Process parameters are: arrivalTime, burstTime, memoryRequirements (kB)
         new Process(1, 15, 15),
@@ -125,7 +160,7 @@ public class PC {
         final int[] availableBlockSizes9 = {60,52,42,30}; // sizes in kB
         MemoryAllocationAlgorithm algorithm9 = new  FirstFit(availableBlockSizes9);
         MMU mmu9 = new MMU(availableBlockSizes9, algorithm9);
-        Scheduler scheduler9 = new RoundRobin();
+        Scheduler scheduler9 = new RoundRobin(2);
         CPU cpu9 = new CPU(scheduler9, mmu9, processes9);
         cpu9.run();
 
@@ -142,7 +177,7 @@ public class PC {
         Scheduler scheduler10 = new FCFS();
         CPU cpu10 = new CPU(scheduler10, mmu10, processes10);
         cpu10.run();
-*/
+        */
     }
 
 }
